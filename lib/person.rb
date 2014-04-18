@@ -12,4 +12,9 @@ class Person
 		@bike.break!
 	end
 
+	def rent_bike_from(station)
+		@bike = station.release_bike
+		self
+	end
+
 end
