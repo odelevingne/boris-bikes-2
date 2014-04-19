@@ -1,5 +1,7 @@
 class DockingStation
 
+	BROKEN_BIKE_SELECTOR = ->(bike){ bike.broken?} 
+
 	def initialize(bikes = [])
 		@bikes = bikes
 	end
@@ -9,11 +11,11 @@ class DockingStation
 	end
 
 	def available_bikes
-		@bikes.reject {|bike| bike.broken?}
+		@bikes.reject(&BROKEN_BIKE_SELECTOR)
 	end
-
+ 
 	def broken_bikes
-		@bikes.select {|bike| bike.broken?}
+		@bikes.select(&BROKEN_BIKE_SELECTOR)
 	end
 
 	def release_bike
