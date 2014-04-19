@@ -12,8 +12,16 @@ class DockingStation
 		@bikes.reject {|bike| bike.broken?}
 	end
 
+	def broken_bikes
+		@bikes.select {|bike| bike.broken?}
+	end
+
 	def release_bike
-		@bikes.delete(available_bikes.pop)
+		release(available_bikes.pop)
+	end
+
+	def release(bike)
+		@bikes.delete(bike)
 	end
 
 	def dock(bike)
@@ -21,5 +29,8 @@ class DockingStation
 		nil
 	end
 
+	def release_broken_bikes
+		broken_bikes.map{|bike| release(bike) }
+	end
 
 end
